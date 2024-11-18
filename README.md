@@ -34,38 +34,18 @@ no.
 
 ### Tabla de cifrado [WW-4677][6] de Organización Meteorológica Mundial (WMO)
 
-| Código     | Descripción                                         |
-| ---------- | --------------------------------------------------- |
-| 00         | Cielo despejado.                                    |
-| 01         | Principalmente despejado.                           |
-| 02         | parcialmente nublado.                               |
-| 03         | Cielo cubierto.                                     |
-| 45, 48     | Niebla y depósito de niebla de escarcha.            |
-| 51, 53, 55 | Llovizna: Intensidad ligera, moderada y densa.      |
-| 56, 57     | Llovizna helada: Intensidad ligera y densa. 	       |
-| 61, 63, 65 | Lluvia: Intensidad leve, moderada y fuerte.         |
-| 66, 67     | Lluvia helada: Intensidad ligera y fuerte.          |
-| 71, 73, 75 | Caída de nieve: Intensidad leve, moderada y fuerte. |
-| 77         | Granos de nieve.                                    |
-| 80, 81, 82 | Lluvias: leves, moderadas y violentas.              |
-| 85, 86     | Chubascos de nieve leves e intensos.                |
-| 095, *     | Tormenta: Leve o moderada.                          |
-| 096, 99, * | Tormenta con granizo leve y fuerte.                 |
-
-| Código     | Descripción                                         |
-| ---------- | --------------------------------------------------- |
-| 00 - 03    | Cielo despejado.                                    |
-| 04 - 09    | Bruma, polvo, arena o humo.                         |
-| 10 - 12    | Neblina o Niebla.                                   |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-|  |  |
-
+| **Código WMO** | **Descripción**              | **Icono sugerido**       | **Condición**        |
+|-----------------|-----------------------------|--------------------------|----------------------|
+| 0               | Cielo despejado             | ☀️ (Sol)                  | Despejado            |
+| 1-3             | Poca nubosidad              | 🌤️ (Sol con nubes)       | Parcialmente nublado |
+| 4-8             | Nubosidad creciente         | ⛅ (Sol detrás de nubes) | Mayormente nublado   |
+| 9-10            | Nublado                     | ☁️ (Nubes)                | Nublado              |
+| 50-57           | Llovizna o niebla ligera    | 🌫️ (Niebla o gotitas)    | Llovizna/Niebla      |
+| 61-63           | Lluvia intermitente         | 🌦️ (Sol y lluvia)        | Lluvia ligera        |
+| 65-67           | Lluvia fuerte               | 🌧️ (Nubes y lluvia)      | Lluvia intensa       |
+| 80-82           | Chubascos                   | 🌩️ (Nubes y rayos)       | Chubascos            |
+| 95              | Tormenta eléctrica          | ⛈️ (Tormenta eléctrica)  | Tormenta             |
+| 96-99           | Tormenta con granizo        | 🌨️ (Granizo)             | Tormenta/Granizo     |
 
 
 [1]:https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
