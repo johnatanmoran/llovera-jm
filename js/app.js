@@ -25,7 +25,7 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                 try {
                         // Consultar API de Open Meteo
                         const response = await fetch(
-                        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,is_day,rain,weather_code&hourly=precipitation_probability,rain,weather_code&past_days=1&past_hours=8&forecast_days=1&forecast_hours=8&models=best_match&timezone=auto`
+                        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,is_day,rain,weather_code&hourly=precipitation_probability,rain,weather_code&past_days=1&past_hours=8&forecast_days=1&forecast_hours=24&models=best_match&timezone=auto`
                     );
                     const data = await response.json();
                     console.log(data);  // Para ver la estructura que devuelve el API de Open Meteo (Borrar)
@@ -35,8 +35,8 @@ document.getElementById("checkWeather").addEventListener("click", () => {
 
                     // 8 horas futuras (omitiendo la hora actual)
                     const next8Hours = data.hourly.precipitation_probability
-                        .slice(-7, -1)
-                    const next8Times = data.hourly.time.slice(-7, -1)
+                        .slice(-9, 1)
+                    const next8Times = data.hourly.time.slice(-9, 1)
                     const futureData = next8Times.map((time, index) => {
                         const date = new Date(time);
                         const hour = date.getHours();
@@ -48,10 +48,10 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                     });
                     console.log(JSON.stringify(futureData, null, 2));
 
-                    // 8 horas pasadas (omitiendo la hora actual y arreglando en orden inverso)
+                    // 8 horas pasadas (omitiendo la hora actual)
                     const past8Hours =
-                        data.hourly.precipitation_probability.slice(0, 8).reverse();
-                    const past8Times = data.hourly.time.slice(0, 8).reverse();
+                        data.hourly.precipitation_probability.slice(0, 8);
+                    const past8Times = data.hourly.time.slice(0, 8);
                     const pastData = past8Times.map((time, index) => {
                         const date = new Date(time);
                         const hour = date.getHours();
