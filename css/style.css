@@ -10,7 +10,7 @@ body {
     margin: 0;
     height: 100vh;
     display: grid;
-    grid-template-rows: 10% auto min-content;
+    grid-template-rows: 20% auto min-content;
     background: #bbddff;
 }
 
@@ -18,7 +18,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 10px;
     background: #87ceeb;
     background: linear-gradient(to bottom, #87ceeb, transparent);
     color: #445588cc;
@@ -26,7 +26,7 @@ header {
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 
 header button {
@@ -35,9 +35,10 @@ header button {
     background-color: #445588;
     color: #bbddee;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: bold;
+    height: 75%;
 }
 
 header button:hover {
@@ -58,7 +59,7 @@ main {
     text-align: center;
     padding: 10px;
     border: 1px solid #ddd;
-    background-color: #f9f9f9;
+    background-color: #fafafa80;
     border-radius: 5px;
     margin: 10px;
     font-size: 1rem;

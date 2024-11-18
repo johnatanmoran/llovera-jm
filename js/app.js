@@ -21,14 +21,18 @@ document.getElementById("checkWeather").addEventListener("click", () =>
 				try
 					{
 						// Consultar API de Open Meteo
-						const response = await fetch(
-						`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability&timezone=auto`);
+						//const response = await fetch(
+						//`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability&timezone=auto`);
+						const meteoResponse = await fetch(
+						`https://api.open-meteo.com/v1/forecast?latitude={latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,is_day,rain,weather_code&hourly=precipitation_probability,rain,weather_code&past_days=1&past_hours=12&forecast_days=1&forecast_hours=1&models=best_match`);
 					const data = await response.json();
 					console.log(data);
 
-					// Obtener datos previos, actuales y futuros
+					// Datos previos, actuales y futuros
 					const past8Hours = data.hourly.precipitation_probability.slice(-8);
 					const next8Hours = data.hourly.precipitation_probability.slice(0, 8);
+					console.log(past8Hours);
+					console.log(next8Hours)
 
 					// Mostrar datos previos y futuros
 					pastWeather.textContent = `Lluvias en las últimas 8 horas: ${past8Hours.join("%, ")}%`;
