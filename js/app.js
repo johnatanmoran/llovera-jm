@@ -33,10 +33,11 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                     // Guardo la hora actual para tener la referencia para el + o - del tiempo
                     const currentHour = new Date().getHours();
 
+                    console.log(JSON.stringify(data.hourly.time, null, 2));
                     // 8 horas futuras (omitiendo la hora actual)
                     const next8Hours = data.hourly.precipitation_probability
-                        .slice(-9, 1)
-                    const next8Times = data.hourly.time.slice(-9, 1)
+                        .slice(9, 17)
+                    const next8Times = data.hourly.time.slice(9, 17)
                     const futureData = next8Times.map((time, index) => {
                         const date = new Date(time);
                         const hour = date.getHours();
