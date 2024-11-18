@@ -1,14 +1,17 @@
 "use strict";
-document.getElementById("checkWeather").addEventListener("click", () => {
-    const pastWeather = document.getElementById("pastWeather");
-    const currentLocation = document.getElementById("currentLocation");
-    const futureWeather = document.getElementById("futureWeather");
-    const currentIcon = document.getElementById("weatherIcon");
-    const currentTemp = document.getElementById("currentTemp");
-    const currentTempSensation = document.getElementById(
-        "currentTempSensation"
-    );
 
+// Llamoa al evento botón
+document.getElementById("checkWeather").addEventListener("click", () => {
+    
+    // Links a los elementos en el DOM
+    const pastWeather = document.getElementById("pastWeather");                     // Probavilidad de lluvia de 8 horas antes
+    const futureWeather = document.getElementById("futureWeather");                 // Probavilidad de lluvia 8 horas adelante
+    const currentLocation = document.getElementById("currentLocation");             // Ciudad o Localidad
+    const currentIcon = document.getElementById("weatherIcon");                     // Icono de tiempo actual
+    const currentTemp = document.getElementById("currentTemp");                     // Temperatura actual
+    const currentTempSensation = document.getElementById("currentTempSensation");   // Sensación termica actual
+
+    // Agrego texto mientras espero las respuestas de las API's
     pastWeather.textContent = "Obteniendo datos previos...";
     currentLocation.textContent = "Detectando ubicación...";
     futureWeather.textContent = "Consultando predicción futura...";
@@ -20,18 +23,17 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                 const { latitude, longitude } = position.coords;
                 console.log(`Latitud: ${latitude}, Longitud: ${longitude}`);
                 try {
-                    // Consultar API de Open Meteo
-                    //const response = await fetch(
-                    //  `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=precipitation_probability&timezone=auto`);
-                    const response = await fetch(
+                        // Consultar API de Open Meteo
+                        const response = await fetch(
                         `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,apparent_temperature,is_day,rain,weather_code&hourly=precipitation_probability,rain,weather_code&past_days=1&past_hours=8&forecast_days=1&forecast_hours=8&models=best_match&timezone=auto`
                     );
                     const data = await response.json();
-                    console.log(data);
-
+                    console.log(data);  // Para ver la estructura que devuelve el API de Open Meteo (Borrar)
+                    
+                    // Guardo la hora actual para tener la referencia para el + o - del tiempo
                     const currentHour = new Date().getHours();
 
-                    // 8 horas futuras (omitiendo la hora actual y arreglando en orden inverso)
+                    // 8 horas futuras (omitiendo la hora actual)
                     const next8Hours = data.hourly.precipitation_probability
                         .slice(-7, -1)
                     const next8Times = data.hourly.time.slice(-7, -1)
@@ -46,7 +48,7 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                     });
                     console.log(JSON.stringify(futureData, null, 2));
 
-                    // 8 horas pasadas
+                    // 8 horas pasadas (omitiendo la hora actual y arreglando en orden inverso)
                     const past8Hours =
                         data.hourly.precipitation_probability.slice(0, 8).reverse();
                     const past8Times = data.hourly.time.slice(0, 8).reverse();
@@ -77,7 +79,8 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                         )
                         .join("");
 
-                    // Código WMO
+
+                    // Códigos WMO
                     const weatherIcons = {
                         0: "☀️", // Cielo despejado
                         1: "🌤️", // Poca nubosidad
@@ -96,7 +99,8 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                     };
                     const code = data.current.weather_code;
                     console.log("Código Weather " + code);
-                    currentIcon.textContent = weatherIcons[code] || "❓"; // Icono por defecto si no se encuentra
+                    
+                    currentIcon.textContent = weatherIcons[code] || `❓(${weatherIcons[code]})`; // Icono por defecto si no se encuentra con codigo
                     currentTemp.textContent =
                         "Temperatura: " + data.current.temperature_2m + "°C";
                     currentTempSensation.textContent =
@@ -115,7 +119,6 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                         "Tu ubicación";
 
                     // Mostrar el nombre de la ciudad/ubicación actual
-                    //currentLocation.currentLocation.textContent = `Ubicación actual: ${locationName}`;
                     currentLocation.innerHTML =`
                         <h3>Ubicación actual</h3>
                         <p class="city">${locationName}</p>`;
