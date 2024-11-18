@@ -88,8 +88,8 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                         3: "⛅", // Poca nubosidad
                         4: "⛅", // Poca nubosidad
                         5: "☁️", // Nublado
-                        50: "🌫️", // Niebla o llovizna ligera
-                        61: "🌦️", // Lluvia ligera
+                        40: "☁️", // Niebla
+                        50: "🌫️", // Llovizna ligera
                         63: "🌦️", // Lluvia
                         65: "🌧️", // Lluvia intensa
                         80: "🌩️", // Chubascos
@@ -100,7 +100,7 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                     const code = data.current.weather_code;
                     console.log("Código Weather " + code);
                     
-                    currentIcon.textContent = weatherIcons[code] || `❓(${weatherIcons[code]})`; // Icono por defecto si no se encuentra con codigo
+                    currentIcon.textContent = weatherIcons[code] || `❓(${code})`; // Icono por defecto si no se encuentra con codigo
                     currentTemp.textContent =
                         "Temperatura: " + data.current.temperature_2m + "°C";
                     currentTempSensation.textContent =
