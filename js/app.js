@@ -48,8 +48,8 @@ document.getElementById("checkWeather").addEventListener("click", () => {
 
                     // 8 horas pasadas
                     const past8Hours =
-                        data.hourly.precipitation_probability.slice(0, 8);
-                    const past8Times = data.hourly.time.slice(0, 8);
+                        data.hourly.precipitation_probability.slice(0, 8).reverse();
+                    const past8Times = data.hourly.time.slice(0, 8).reverse();
                     const pastData = past8Times.map((time, index) => {
                         const date = new Date(time);
                         const hour = date.getHours();
@@ -94,7 +94,6 @@ document.getElementById("checkWeather").addEventListener("click", () => {
                         96: "🌨️", // Granizo
                         99: "🌨️", // Granizo
                     };
-                    
                     const code = data.current.weather_code;
                     console.log("Código Weather " + code);
                     currentIcon.textContent = weatherIcons[code] || "❓"; // Icono por defecto si no se encuentra
